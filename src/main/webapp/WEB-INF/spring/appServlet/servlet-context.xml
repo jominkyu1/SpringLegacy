@@ -16,6 +16,7 @@
   <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources 
     in the ${webappRoot}/resources directory -->
   <resources mapping="/resources/**" location="/resources/" />
+  <!-- 사이트 개발에 필요한 리소스 자원인 HTML,CSS,JS,jQuery,이미지 등이 들어가는 경로 -->
 
   <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views 
     directory -->
@@ -26,7 +27,7 @@
     <!-- 뷰 리졸버 경로인 뷰페이지 경로가 잡혀있음 -->
     <beans:property name="suffix" value=".jsp" />
   </beans:bean>
-  
+
   <context:component-scan base-package="net.daum.controller" />
-  
+  <!-- Spring 컨트롤러 클래스가 들어가는 경로 AutoScan태그에 의해서 자동으로 스프링에서 인식됨 -->
 </beans:beans>

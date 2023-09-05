@@ -5,8 +5,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <configuration>
   <typeAliases>
-  
-  
+    <!-- 객체 별칭을 관리. 이 별칭을 MyBatis 매퍼태그에서 참조해서 사용한다.
+                  별칭이름(alias)를 지정하지 않으면 풀패키지명을 적어서 사용해야함 
+                  관련 설정이 root-context.xml에 존재-->
+    <typeAlias type="net.daum.vo.MemberVO" alias="member"/>
   </typeAliases>
-  
 </configuration>
