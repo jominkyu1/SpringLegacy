@@ -52,4 +52,10 @@
 
   <context:component-scan base-package="net.daum.dao" />
   <!-- net.daum.dao패키지의 @Component를 스캔함 -->
+  <context:component-scan base-package="net.daum.service" />
+  <!--  서비스 추가 목적
+    1. 컨트롤러와 모델 DAO 연결하는 중간 매개체 역할
+    2. 고객의 추가 요구사항을 반영
+    3. 스프링의 AOP를 통한 트랜잭션 적용이 핵심 (데이터의 불일치 현상을 제거=일관성 유지)
+   -->
 </beans>
