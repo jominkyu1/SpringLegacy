@@ -1,16 +1,53 @@
-create table tbl_board(
-    bno number(38) primary key,
-    writer varchar2(100) not null,
-    title varchar2(200) not null,
-    content varchar2(4000) not null,
-    viewcnt number(38) default 0,
-    regdate timestamp
+CREATE TABLE tbl_board (
+    bno     NUMBER(38) PRIMARY KEY,
+    writer  VARCHAR2(100) NOT NULL,
+    title   VARCHAR2(200) NOT NULL,
+    content VARCHAR2(4000) NOT NULL,
+    viewcnt NUMBER(38) DEFAULT 0,
+    regdate TIMESTAMP
 );
 
-select * from tbl_board order by bno desc;
+SELECT
+    *
+FROM
+    tbl_board
+ORDER BY
+    bno DESC;
 
-create sequence bno_seq
-increment by 1
-start with 1
-nocache;
+SELECT
+    COUNT(*)
+FROM
+    tbl_board;
 
+CREATE SEQUENCE bno_seq INCREMENT BY 1 START WITH 1 NOCACHE;
+
+SELECT
+    bno_seq.NEXTVAL
+FROM
+    dual;
+
+SELECT
+    *
+FROM
+    (
+        SELECT
+            ROWNUM rnum,
+            bno,
+            writer,
+            title,
+            content,
+            viewcnt,
+            regdate
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    tbl_board
+                ORDER BY
+                    bno DESC
+            )
+    )
+WHERE
+        rnum >= 1
+    AND rnum <= 10;

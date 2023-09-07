@@ -17,6 +17,5 @@ public class MemberDaoImpl implements MemberDao{
 		/*	MyBatis에서 Insert메서드는 레코드를 저장시킨다.
 		 * 	mem_in은 /net/daum/mappers/mybatis/member_test.xml에서 설정한 유일 아이디명이다.
 		 * */
-		
 	}
 }

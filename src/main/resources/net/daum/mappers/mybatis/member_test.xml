@@ -9,4 +9,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 파라미터타입은 mybatis-config에서 설정한 MemberVO 빈클래스의 객체 별칭이름 -->
     insert into tbl_member (userid,userpw,username,email) values(#{userid},#{userpw},#{username},#{email})
   </insert>
+
 </mapper>

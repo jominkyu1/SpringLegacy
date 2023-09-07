@@ -17,6 +17,6 @@
   String s1 = (String) request.getAttribute("serverTime");
 %>
 <p><%=s1%></p>
-  
+
 </body>
 </html>
