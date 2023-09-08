@@ -30,4 +30,25 @@ public class BoardDaoImpl implements BoardDao{
 		List<BoardVO> list = sqlSession.selectList("board_list", b);
 		return list;
 	}
+
+	@Override
+	public BoardVO getBoardCont(int bno) {
+		return sqlSession.selectOne("board_cont", bno);
+	}
+
+	//조회수증가
+	@Override
+	public void updateHit(int bno) {
+		sqlSession.update("board_hit", bno);
+	}
+
+	@Override
+	public void updateBoard(BoardVO b) {
+		sqlSession.update("board_update", b);
+	}
+
+	@Override
+	public void deleteBoard(int bno) {
+		sqlSession.delete("board_delete", bno);
+	}
 }

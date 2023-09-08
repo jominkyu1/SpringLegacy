@@ -28,7 +28,29 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardVO> getBoardList(BoardVO b) {
-		
 		return boardDao.getBoardList(b);
+	}
+
+	//조회수 증가+내용보기 -> 스프링의 AOP를 통한 트랜잭션 적용대상 (데이터 불일치 현상 제거)
+	@Override
+	public BoardVO getBoardCont(int bno) { 
+		boardDao.updateHit(bno);
+		return boardDao.getBoardCont(bno);
+	}
+
+	//수정폼 진입시 조회수증가는 하지않고 내용만 리턴
+	@Override
+	public BoardVO getBoardCont2(int bno) {
+		return boardDao.getBoardCont(bno);
+	}
+
+	@Override
+	public void updateBoard(BoardVO b) {
+		boardDao.updateBoard(b);
+	}
+
+	@Override
+	public void deleteBoard(int bno) {
+		boardDao.deleteBoard(bno);
 	}
 }

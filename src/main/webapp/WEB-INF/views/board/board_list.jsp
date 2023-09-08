@@ -34,8 +34,8 @@
       <tr>
         <td>${list.bno}</td>
         <td>${list.writer}</td>
-        <td><a href="/controller/board/board_cont?bno=${list.bno}&page=${page}">${list.title}</a></td>
-        <!-- /controller/board/board_cont?bno=글번호&page=현재페이지 
+        <td><a href="/controller/board/board_cont?bno=${list.bno}&page=${page}&state=cont">${list.title}</a></td>
+        <!-- /controller/board/board_cont?bno=글번호&page=현재페이지?&state=수정or상세보기(cont) 
             GET방식으로 쿼리파라미터(쿼리스트링) 전달. 현재페이지는 책갈피 기능을위해 전달한다.
         -->
         <td>${list.content}</td>

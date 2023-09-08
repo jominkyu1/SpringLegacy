@@ -28,4 +28,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       &lt;  <
     -->
   </select>
+  
+  <select id="board_cont" resultType="board">
+    select * from tbl_board where bno=#{bno}
+  </select>
+  
+  <update id="board_hit" parameterType="int" >
+    update tbl_board set viewcnt = viewcnt+1 where bno = #{bno}
+  </update>
+  
+  <update id="board_update" parameterType="board">
+    update tbl_board set title=#{title}, content=#{content} where bno=#{bno}
+  </update>
+  
+  <delete id="board_delete">
+    delete from tbl_board where bno=#{bno}
+  </delete>
+  
 </mapper>

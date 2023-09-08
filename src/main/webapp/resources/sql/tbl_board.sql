@@ -7,6 +7,7 @@ CREATE TABLE tbl_board (
     regdate TIMESTAMP
 );
 
+
 SELECT
     *
 FROM
@@ -51,3 +52,14 @@ FROM
 WHERE
         rnum >= 1
     AND rnum <= 10;
+    
+update tbl_board SET viewcnt =+ 1 where bno = 15;
+commit;
+
+update tbl_board set title='AA', content='BB' where bno=23;
+
+delete from tbl_board where bno=23;
+
+select * from tbl_board order by bno desc;
+
+commit;

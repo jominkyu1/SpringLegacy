@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -92,4 +94,52 @@ public class BoardController { //SpringMVC 게시판 컨트롤러
 		
 		return "board/board_list";
 	}
+	
+	//내용보기 수정폼 조회수증가 
+	@RequestMapping("/board_cont") // GET, POST
+	public ModelAndView board_cont(@RequestParam("bno") int bno,
+						   @RequestParam("page") int page,
+						   String state,
+						   BoardVO b) {
+		/*	@RequestParam은 request.getParameter()와 동일한 기능	
+		 *	쿼리파라미터명과 받는 변수명이 일치하면 RequestParam을 생략가능 
+		 * */
+		ModelAndView cm = new ModelAndView();
+		
+		if(state.equals("cont")) { //내용보기일때만 조회수증가
+			b = boardService.getBoardCont(bno);
+			cm.setViewName("board/board_cont");
+		} else { //수정폼
+			b = boardService.getBoardCont2(bno);
+			cm.setViewName("board/board_edit");
+		}
+		
+		//textArea 입력박스에서 엔터 -> 줄바꿈처리
+		String content = b.getContent().replace("\n", "<br>");
+
+		cm.addObject("page", page); //책갈피처리
+		cm.addObject("b", b);
+		cm.addObject("content", content); //줄바꿈처리한 내용
+		return cm;
+	}
+	
+	@PostMapping("/board_editDone")
+	public ModelAndView board_edit(BoardVO b, int page, RedirectAttributes rd) {
+		ModelAndView mv = new ModelAndView("redirect:/board/board_cont");
+		boardService.updateBoard(b);
+		
+		mv.addObject("page", page);
+		mv.addObject("bno", b.getBno());
+		mv.addObject("state", "cont");
+		rd.addFlashAttribute("done", "게시글 수정 완료!");
+		return mv;
+	}
+	
+	@GetMapping("/board_del")
+	public String board_del(int bno, int page, RedirectAttributes redirect) {
+		boardService.deleteBoard(bno);
+		redirect.addFlashAttribute("result", "success");
+		return "redirect:/board/board_list?page=" + page;
+	}
+	
 }
