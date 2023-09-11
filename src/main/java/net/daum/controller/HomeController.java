@@ -32,9 +32,14 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		
 		return "home";
 		// 	뷰 리졸버 -> /WEB-INF/views/home.jsp
+	}
+	
+	//Ajax 댓글 뷰 페이지
+	@RequestMapping("/test")
+	public void test() {
+		//리턴이 VOID면 매핑주소 -> VIEW페이지 파일명
 	}
 	
 }

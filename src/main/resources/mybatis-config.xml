@@ -10,5 +10,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
                   관련 설정이 root-context.xml에 존재-->
     <typeAlias type="net.daum.vo.MemberVO" alias="member"/>
     <typeAlias type="net.daum.vo.BoardVO" alias="board"/>
+    <typeAlias type="net.daum.vo.ReplyVO" alias="reply"/>
   </typeAliases>
 </configuration>

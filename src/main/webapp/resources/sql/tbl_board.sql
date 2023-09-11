@@ -63,3 +63,34 @@ delete from tbl_board where bno=23;
 select * from tbl_board order by bno desc;
 
 commit;
+
+
+-- 댓글 테이블 생성
+create table tbl_reply(
+    rno number(38) primary key, --댓글번호
+    bno number(38) default 0, -- 게시판 번호( 외래키 참조 )
+    replyer varchar2(50) not null,
+    replytext varchar2(4000) not null,
+    regdate timestamp, -- 댓글등록날짜
+    updatedate timestamp -- 댓글 수정날짜
+);
+
+select * from tbl_reply order by rno desc;
+
+--tbl_reply 테이블의 bno 컬럼에 외래키 추가 설정
+alter table tbl_reply add constraint tbl_reply_bno_fk
+foreign key(bno) references tbl_board(bno);
+
+--tbl_reply rno에 사용할 시퀀스 생성
+create sequence rno_seq
+start with 1
+increment by 1
+nocache
+nocycle;
+
+select rno_seq.nextval from dual;
+
+select * from tbl_reply order by rno desc;
+select * from tbl_board;
+
+delete from tbl_reply where rno=2;
