@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <select id="board_list" parameterType="board" resultType="board">
     select * from
-    (select rowNum rNum, bno, writer, title, content, viewcnt, regdate
+    (select rowNum rNum, bno, writer, title, content, viewcnt, regdate, replycnt
     from (select * from tbl_board order by bno desc))
     where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
     

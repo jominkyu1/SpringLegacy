@@ -13,8 +13,9 @@
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd"
 >
-
-  <!-- Root Context: defines shared resources visible to all other web components -->
+  <aop:aspectj-autoproxy />
+  <!-- Spring AOP 자동 프록시 설정 -->
+  
 
   <!-- Srping JDBC -->
   <bean id="dataSource"
@@ -42,6 +43,13 @@
     <!-- SQL문을 별도로 관리하는 mybatis Mapper xml태그 경로 -->
   </bean>
 
+  <!-- Spring 트랜잭션 매니저(트랜잭션 관리자) 설정 -->
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" /> <!-- Setter 의존성 주입 -->
+  </bean>
+  <tx:annotation-driven/> <!-- 트랜잭션 설정 어노테이션: @Transactional을 통한 트랜잭션 관리가능 -->
+  
+  
   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
     destroy-method="clearCache"
   >
@@ -58,4 +66,6 @@
     2. 고객의 추가 요구사항을 반영
     3. 스프링의 AOP를 통한 트랜잭션 적용이 핵심 (데이터의 불일치 현상을 제거=일관성 유지)
    -->
+   
+   <aop:config /> <!-- AOP XML 환경설정  -->
 </beans>

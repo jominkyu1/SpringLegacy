@@ -56,18 +56,19 @@
   	$bno=24;
   	
   	getAllList(); // 댓글 목록함수 호출
-  	
-  	function getAllList(){
+
+    function getAllList(){
   		$.getJSON("/controller/replies/all/" + $bno, function(data){
   			$result="";
         $(data).each(function(){ //jQuery each()
           $result += "<li data-rno='" + this.rno + "' class='replyLi'>"
-            + this.rno + " : <span class='com' style='color:blue; font-weight:bold;'>'"
+            + this.rno + " : <span class='com' style='color:blue; font-weight:bold;'>"
               + this.replytext + "</span> <button type='button'>댓글수정</button></li><br>";
         });
         $('#replies').html($result);
   		});
   	}
+
 
     //댓글등록
     $('#replyAddBtn').on('click', function(){
@@ -100,7 +101,7 @@
       var reply = $(this).parent(); //부모요소인 li태그를 구함
       var rno = reply.attr("data-rno"); //li태그의 속성인 data-rno 값 즉, 댓글번호를 구함
       var replytext = reply.children('.com').text(); // 댓글내용 -> li태그의 자식요소 com 클래스의 댓글내용문자만 TEXT함수로 가져옴
-
+		
       $('.modal-rno').html(rno); // modal-rno 클래스 선택자 영역에 댓글 번호를 변경 적용
       $('#replytext').val(replytext); // textArea 입력박스에 val함수로 댓글내용을 변경 적용
       $('#modDiv').show('slow');
@@ -113,13 +114,15 @@
     
     //댓글삭제
     $('#replyDelBtn').on('click', function(){
+      var rno = $('.modal-rno').text();
+
       $.ajax({
         type: "DELETE",
-        url: "/replies/" + $bno,
-        data: $('.modal-rno').val(), //24?
-
+        url: "/controller/replies/" + rno,
+        
         success: function(){
           alert('삭제 완료');
+          modDivClose();
           getAllList();
         }
       });
@@ -127,6 +130,27 @@
 
 
     //댓글수정
+    $('#replyModBtn').on('click', function(){
+      var rno = $('.modal-rno').text();
+      var replytext = $('#replytext').val();
+
+      $.ajax({
+        type: "PUT",
+        url: "/controller/replies/" + rno,
+        contentType: "application/json; charset=utf-8",
+        dataType : "text",
+        data : JSON.stringify({
+          replytext : replytext
+        }),
+        
+        success: function(){
+          alert('수정 완료');
+          modDivClose();
+          getAllList();
+        }
+      });
+    });
+
   </script>
 </body>
 </html>

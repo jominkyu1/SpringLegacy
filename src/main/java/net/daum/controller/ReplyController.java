@@ -69,12 +69,10 @@ public class ReplyController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			log.info("Parameter rno::: {}", rno);
-			log.info("before vo.setRno()::: {}", vo.getRno());
 			vo.setRno(rno);
-			
 			replyService.editReply(vo);
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+			log.info("MODIFIED CONTENT RNO::: {}", vo.getRno());
 		}catch(Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -83,7 +81,7 @@ public class ReplyController {
 	}
 	
 	//댓글 삭제
-	@RequestMapping(value = "{rno}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{rno}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> delReply(@PathVariable("rno") int rno){
 		ResponseEntity<String> entity = null;
 		try {

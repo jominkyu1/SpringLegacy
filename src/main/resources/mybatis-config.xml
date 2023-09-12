@@ -11,5 +11,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <typeAlias type="net.daum.vo.MemberVO" alias="member"/>
     <typeAlias type="net.daum.vo.BoardVO" alias="board"/>
     <typeAlias type="net.daum.vo.ReplyVO" alias="reply"/>
+    
+    <!--  -->
+    <typeAlias type="net.daum.vo.UserVO" alias="user"/>
+    <typeAlias type="net.daum.vo.MessageVO" alias="message"/>
+    <!--  -->
+    
   </typeAliases>
 </configuration>
