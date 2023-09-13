@@ -20,4 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <delete id="reply_del" parameterType="int">
     delete from tbl_reply where rno=#{rno}
   </delete>
+  
+  <select id="reply_getBno" resultType="int">
+    select bno from tbl_reply where rno = #{rno}
+  </select>
 </mapper>

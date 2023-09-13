@@ -1,6 +1,8 @@
 package net.daum.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +52,27 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public void deleteBoard(int bno) {
 		sqlSession.delete("board_delete", bno);
+	}
+
+	
+	@Override
+	public void addReplyCnt(int bno) {
+		// TODO Auto-generated method stub
+		sqlSession.update("board_addReplyCnt", bno);
+	}
+
+	@Override
+	public void minusReplyCnt(int rno) {
+		// TODO Auto-generated method stub
+		sqlSession.update("board_minusReplyCnt", rno);
+	}
+	
+	@Override
+	public void updateReplyCnt(int bno, int count) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("bno", bno);
+		map.put("count", count);
+		
+		sqlSession.update("board_updateReplyCnt", map);
 	}
 }

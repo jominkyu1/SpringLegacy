@@ -64,6 +64,8 @@
   
   <hr><br>
   
+  <h2>[Property접근: 댓글 갯수: ${b.replycnt} 개]</h2><br>
+  <h2 id="replyCount"></h2>
   <%-- 댓글 목록 --%>
   <ul id="replies"></ul>
   
@@ -74,7 +76,7 @@
 
     function getAllList(){
       $.getJSON("/controller/replies/all/" + $bno, function(data){
-        
+        $('#replyCount').html("AJAX접근: 댓글: " + data.length + "개"); //댓글수 출력
         $result="";
         $(data).each(function(){ //jQuery each()
           $date = new Date(this.regdate);
@@ -107,6 +109,7 @@
         success: function($data){
           if($data == "SUCCESS"){
             alert('댓글이 등록되었습니다!');
+            //location.reload(); //자바스크립트에서 새로고침(단축키 F5)
             getAllList();
           }
         }

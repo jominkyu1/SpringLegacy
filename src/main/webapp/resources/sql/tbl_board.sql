@@ -17,9 +17,15 @@ ORDER BY bno DESC;
 ALTER TABLE tbl_board
     ADD replycnt NUMBER(38) DEFAULT 0;
 
+
 -- 각 게시판 번호에 해당하는 실제 댓글수를 카운트해서 세롭게 추가된 replycnt컬럼 레코드값으로 수정
 update tbl_board
 set replycnt = (select count(*) from tbl_reply where bno = tbl_board.bno);
+
+commit;
+
+update tbl_board set replycnt = replycnt - 1
+                 where bno = (select bno from tbl_reply where rno=16);
 
 
 -- tbl_board 테이블의 bno 컬럼에 시퀀스 추가

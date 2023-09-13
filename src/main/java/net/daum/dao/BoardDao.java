@@ -15,4 +15,9 @@ public interface BoardDao {
 	
 	public void updateBoard(BoardVO b);
 	public void deleteBoard(int bno);
+	
+	public void addReplyCnt(int bno);
+	public void minusReplyCnt(int rno);
+	
+	public void updateReplyCnt(int bno, int count);
 }

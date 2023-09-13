@@ -30,4 +30,7 @@
 
   <context:component-scan base-package="net.daum.controller" />
   <!-- Spring 컨트롤러 클래스가 들어가는 경로 AutoScan태그에 의해서 자동으로 스프링에서 인식됨 -->
+  
+  <!-- Spring 이진파일(Multipart) 업로드 API 설정: 첨부파일을 처리하는 빈아이디 설정-->
+  <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 </beans:beans>

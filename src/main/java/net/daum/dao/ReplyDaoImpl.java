@@ -33,4 +33,9 @@ public class ReplyDaoImpl implements ReplyDao{
 	public void deleteReply(int rno) {
 		sqlSession.delete("reply_del", rno);
 	}
+
+	@Override
+	public int getBno(int rno) {
+		return sqlSession.selectOne("reply_getBno", rno);
+	}
 }	

@@ -47,6 +47,7 @@
   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource" /> <!-- Setter 의존성 주입 -->
   </bean>
+  
   <tx:annotation-driven/> <!-- 트랜잭션 설정 어노테이션: @Transactional을 통한 트랜잭션 관리가능 -->
   
   
